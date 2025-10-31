@@ -66,7 +66,6 @@ document
   .getElementById("searchInput")
   .addEventListener("input", handleSearchInput);
 
-document.getElementById("title").innerHTML = `${sitename}`;
 
 document.getElementById("subtitle").innerHTML = `${subtext}`
 
