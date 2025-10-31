@@ -1,25 +1,40 @@
-// This changes the title of your site
-
-// removed var sitename = " Google "; 
+// CONFIG
 var subtext = "Qwerto Games"; // set the subtext
-
-// more settings in main.css
-
-
-
-// END CONFIG
-// DO NOT MODIFY IF YOU DO NOT KNOW WHAT YOUR DOING!
-
-import "/./config/custom.js";
-
 var serverUrl1 = "https://gms.parcoil.com";
-var currentPageTitle = document.title;
 document.title = "Google";
-let gamesData = []; 
+let gamesData = [];
 
+// Wait until DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Set subtitle
+  const subtitleEl = document.getElementById("subtitle");
+  if (subtitleEl) subtitleEl.innerHTML = subtext;
+
+  // Set up search input listener
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", handleSearchInput);
+  }
+
+  // Fetch games data
+  fetch("./config/games.json")
+    .then((response) => {
+      if (!response.ok) throw new Error("Failed to load games.json");
+      return response.json();
+    })
+    .then((data) => {
+      gamesData = data;
+      displayFilteredGames(data);
+    })
+    .catch((error) => console.error("Error fetching games:", error));
+});
+
+// Display games
 function displayFilteredGames(filteredGames) {
   const gamesContainer = document.getElementById("gamesContainer");
-  gamesContainer.innerHTML = ""; 
+  if (!gamesContainer) return;
+
+  gamesContainer.innerHTML = "";
 
   filteredGames.forEach((game) => {
     const gameDiv = document.createElement("div");
@@ -41,31 +56,16 @@ function displayFilteredGames(filteredGames) {
   });
 }
 
-
+// Handle search input
 function handleSearchInput() {
-  const searchInputValue = document
-    .getElementById("searchInput")
-    .value.toLowerCase();
+  const searchInput = document.getElementById("searchInput");
+  if (!searchInput) return;
+
+  const searchInputValue = searchInput.value.toLowerCase();
   const filteredGames = gamesData.filter((game) =>
     game.name.toLowerCase().includes(searchInputValue)
   );
   displayFilteredGames(filteredGames);
 }
 
-
-fetch("./config/games.json") 
-  .then((response) => response.json())
-  .then((data) => {
-    gamesData = data;
-    displayFilteredGames(data); 
-  })
-  .catch((error) => console.error("Error fetching games:", error));
-
-
-document
-  .getElementById("searchInput")
-  .addEventListener("input", handleSearchInput);
-
-
-document.getElementById("subtitle").innerHTML = `${subtext}`
 
