@@ -14,7 +14,7 @@ import "/./config/custom.js";
 
 var serverUrl1 = "https://gms.parcoil.com";
 var currentPageTitle = document.title;
-document.title = `${currentPageTitle} | ${sitename}`;
+document.title = "Google";
 let gamesData = []; 
 
 function displayFilteredGames(filteredGames) {
