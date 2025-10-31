@@ -1,7 +1,7 @@
 // This changes the title of your site
 
-var sitename = "Qwerto"; // Change this to change the name of your website.
-var subtext = "Games"; // set the subtext
+var sitename = " "; // Change this to change the name of your website.
+var subtext = "Qwerto Games"; // set the subtext
 
 // more settings in main.css
 
