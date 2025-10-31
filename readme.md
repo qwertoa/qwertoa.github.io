@@ -2,6 +2,9 @@
 
 <h1 align=center> Unblocked games</h1>
 
+By me 
+
+
 ### License:
 
 This project is licensed under the [MIT License](LICENSE).
